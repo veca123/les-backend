@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  database_rentx:
+    image: postgres
+    container_name: database_les-backend
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=les-backend
+      - POSTGRES_PASSWORD=les-backend
+      - POSTGRES_DB=les-backend
+    volumes:
+      - pgdata:/data/postgres
+
+volumes:
+  pgdata:
+    driver: local
