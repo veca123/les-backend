@@ -152,6 +152,110 @@
           }
         }
       }
+    },
+    "/teams":{
+      "post": {
+        "tags": [
+          "Team"
+        ],
+        "summary": "Create a new team",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/reqBody/Team"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Team"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Team already exists"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/teams/addUser":{
+      "post":{
+        "tags": [
+          "Team"
+        ],
+        "summary": "Add user to team",
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "query",
+            "description": "Team ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "User ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Team"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Team already exists"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
     }
   },
   "components": {
@@ -160,7 +264,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
+            "type": "string",
             "example": "86633558-9689-4c71-93c9-3f306de4c4a7"
           },
           "name": {
@@ -186,6 +290,33 @@
           "isAdmin": {
             "type": "boolean",
             "example": false
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-01T00:00:00.000Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-01T00:00:00.000Z"
+          }
+        }
+      },
+      "Team": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "86633558-9689-4c71-93c9-3f306de4c4a7"
+          },
+          "name": {
+            "type": "string",
+            "example": "User"
+          },
+          "description": {
+            "type": "string",
+            "example": "User"
           },
           "createdAt": {
             "type": "string",
@@ -232,6 +363,19 @@
           "password": {
             "type": "string",
             "example": "password"
+          }
+        }
+      },
+      "Team": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Test"
+          },
+          "description": {
+            "type": "string",
+            "example": "Test"
           }
         }
       }

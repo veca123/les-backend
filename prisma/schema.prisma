@@ -8,13 +8,64 @@ datasource db {
 }
 
 model User {
-  id            String   @id @default(uuid())
-  name          String
-  email         String   @unique
-  password      String
-  driverLicense String
-  avatar        String?
-  isAdmin       Boolean  @default(false)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id       String  @id @default(uuid())
+  name     String
+  email    String  @unique
+  password String
+  avatar   String?
+
+  teams Team[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
+
+model Team {
+  id          String @id @default(uuid())
+  name        String @unique
+  description String
+
+  users User[]
+  // events Event[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// model Sport {
+//   id   String @id @default(uuid())
+//   name String @unique
+
+//   events Event[]
+
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }
+
+// model Location {
+//   id          String @id @default(uuid())
+//   address     String
+//   description String
+
+//   events Event[]
+
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }
+
+// model Event {
+//   id            String   @id @default(uuid())
+//   name          String
+//   description   String
+//   date          DateTime
+//   numberPlayers Int
+
+//   sportId    String?
+//   sport      Sport?    @relation(fields: [sportId], references: [id])
+//   locationId String?
+//   Location   Location? @relation(fields: [locationId], references: [id])
+//   teams      Team[]
+
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+// }

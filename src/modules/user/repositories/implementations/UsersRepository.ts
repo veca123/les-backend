@@ -9,14 +9,12 @@ export class UsersRepository implements IUsersRepository {
   private ormRepository = prisma.user;
 
   public async create({
-    driverLicense,
     email,
     name,
     password,
   }: ICreateUserDTO): Promise<User> {
     const user = await this.ormRepository.create({
       data: {
-        driverLicense,
         email,
         name,
         password,

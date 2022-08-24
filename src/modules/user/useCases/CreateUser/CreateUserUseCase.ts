@@ -17,7 +17,6 @@ export class CreateUserUseCase {
   ) {}
 
   public async execute({
-    driverLicense,
     email,
     name,
     password,
@@ -29,7 +28,6 @@ export class CreateUserUseCase {
     const passwordHash = await this.hashProvider.generateHash(password);
 
     const user = await this.usersRepository.create({
-      driverLicense,
       email,
       name,
       password: passwordHash,
