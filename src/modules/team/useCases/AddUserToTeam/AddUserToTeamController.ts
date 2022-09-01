@@ -6,11 +6,6 @@ import { AddUserToTeamUseCase } from './AddUserToTeamUseCase';
 export class AddUserToTeamController {
   async handle(request: Request, response: Response): Promise<Response> {
     const { userId, teamId } = request.query;
-    console.log(
-      '🚀 ~ file: AddUserToTeamController.ts ~ line 9 ~ AddUserToTeamController ~ handle ~ userId, teamId',
-      userId,
-      teamId,
-    );
 
     const createTeamUseCase = container.resolve(AddUserToTeamUseCase);
 
