@@ -17,7 +17,11 @@ export class LocationsRepository implements ILocationsRepository {
   }
 
   public async findAll(): Promise<Location[]> {
-    const locations = await this.ormRepository.findMany();
+    const locations = await this.ormRepository.findMany({
+      include: {
+        events: true,
+      },
+    });
 
     return locations;
   }

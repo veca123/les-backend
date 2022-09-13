@@ -9,7 +9,7 @@ export class FindAllTeamsUseCase {
     @inject('TeamsRepository')
     private teamsRepository: ITeamsRepository,
   ) {}
-  public async execute(): Promise<Location[]> {
+  public async execute(): Promise<Team[]> {
     const teams = await this.teamsRepository.findAll();
 
     return teams;

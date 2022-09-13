@@ -198,6 +198,27 @@
           }
         },
         "security": []
+      },
+      "get":{
+        "tags": [
+          "Team"
+        ],
+        "summary": "Get all teams",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Team"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/teams/addUser":{
@@ -255,6 +276,74 @@
           }
         },
         "security": []
+      }
+    },
+    "/events":{
+      "post": {
+        "tags": [
+          "Event"
+        ],
+        "summary": "Create a new event",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/reqBody/Event"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid data"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      },
+      "get":{
+        "tags": [
+          "Event"
+        ],
+        "summary": "Get all events",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Event"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -329,6 +418,42 @@
             "example": "2020-01-01T00:00:00.000Z"
           }
         }
+      },
+      "Event":{
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "86633558-9689-4c71-93c9-3f306de4c4a7"
+          },
+          "name": {
+            "type": "string",
+            "example": "User"
+          },
+          "description": {
+            "type": "string",
+            "example": "User"
+          },
+          "teamsLimit": {
+            "type": "number",
+            "example": 2
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-01T00:00:00.000Z"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-01T00:00:00.000Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-01T00:00:00.000Z"
+          }
+        }
       }
     },
     "reqBody": {
@@ -378,6 +503,28 @@
             "example": "Test"
           }
         }
+      },
+      "Event":{
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Test"
+          },
+          "description": {
+            "type": "string",
+            "example": "Test"
+          },
+          "teamsLimit": {
+            "type": "number",
+            "example": 2
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-01T00:00:00.000Z"
+          }
+        }
       }
     },
     "securitySchemes": {
@@ -387,10 +534,5 @@
         "bearerFormat": "JWT"
       }
     }
-  },
-  "security": [
-    {
-      "BearerAuth": []
-    }
-  ]
+  }
 }

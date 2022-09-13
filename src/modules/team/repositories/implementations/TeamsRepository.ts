@@ -21,7 +21,12 @@ export class TeamsRepository implements ITeamsRepository {
   }
 
   public async findAll(): Promise<Team[]> {
-    const categories = await this.ormRepository.findMany();
+    const categories = await this.ormRepository.findMany({
+      include: {
+        users: true,
+        events: true,
+      },
+    });
 
     return categories;
   }

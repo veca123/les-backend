@@ -9,7 +9,7 @@ export class FindAllEventsUseCase {
     @inject('EventsRepository')
     private eventsRepository: IEventsRepository,
   ) {}
-  public async execute(): Promise<Location[]> {
+  public async execute(): Promise<Event[]> {
     const events = await this.eventsRepository.findAll();
 
     return events;
