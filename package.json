@@ -12,7 +12,7 @@
     "tsc": "./node_modules/typescript/bin/tsc",
     "build": "tsc",
     "postinstall": "npm run build",
-    "start": "node dist/shared/infra/http/server.js"
+    "start": "node src/shared/infra/http/server.js"
   },
   "dependencies": {
     "@prisma/client": "^4.1.1",
