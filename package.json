@@ -9,6 +9,7 @@
     "pd": "prisma migrate deploy",
     "pg": "prisma generate",
     "ps": "prisma studio",
+    "tsc": "./node_modules/typescript/bin/tsc",
     "build": "tsc",
     "postinstall": "npm run build",
     "start": "node dist/shared/infra/http/server.js"
