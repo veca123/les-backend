@@ -2,21 +2,20 @@
   "compilerOptions": {
     "target": "ES6",
     "module": "commonjs",
-    "rootDir": "./",
-    "baseUrl": "./src",
-    "outDir": "./dist",
+    "outDir": "dist",
+    "baseUrl": ".",
     "paths": {
       "@modules/*": [
-        "modules/*"
+        "src/modules/*"
       ],
       "@shared/*": [
-        "shared/*"
+        "src/shared/*"
       ],
       "@utils/*": [
-        "utils/*"
+        "src/utils/*"
       ],
       "@config/*": [
-        "config/*"
+        "src/config/*"
       ]
     },
     "esModuleInterop": true,
