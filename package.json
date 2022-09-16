@@ -8,9 +8,7 @@
     "pm": "prisma migrate dev",
     "pd": "prisma migrate deploy",
     "pg": "prisma generate",
-    "ps": "prisma studio",
-    "build": "tsc",
-    "start": "node dist/shared/infra/server.js"
+    "ps": "prisma studio"
   },
   "dependencies": {
     "@prisma/client": "^4.1.1",
