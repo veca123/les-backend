@@ -18,7 +18,7 @@ app.use(
   swaggerUi.serve,
   swaggerUi.setup(swaggerFile, {
     customCss,
-    customSiteTitle: 'RenteX API',
+    customSiteTitle: 'PlayGames API',
   }),
 );
 

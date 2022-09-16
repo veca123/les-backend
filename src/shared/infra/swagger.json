@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "RentX Docs",
+    "title": "PlayGames Docs",
     "version": "1.0.0"
   },
   "paths": {
@@ -368,17 +368,9 @@
             "type": "string",
             "example": "password"
           },
-          "driverLicense": {
-            "type": "string",
-            "example": "driverLicense"
-          },
           "avatar":{
             "type": "string",
             "example": "avatar"
-          },
-          "isAdmin": {
-            "type": "boolean",
-            "example": false
           },
           "createdAt": {
             "type": "string",
@@ -471,10 +463,6 @@
           "password": {
             "type": "string",
             "example": "password"
-          },
-          "driverLicense": {
-            "type": "string",
-            "example": "driverLicense"
           }
         }
       },

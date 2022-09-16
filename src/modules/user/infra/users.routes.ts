@@ -3,8 +3,6 @@ import multer from 'multer';
 
 import uploadConfig from '@config/upload';
 
-import { ensureAuthenticated } from '@shared/middlewares/ensureAuthenticated';
-
 import { CreateUserController } from '../useCases/CreateUser/CreateUserController';
 import { FindAllUsersController } from '../useCases/FindAllUsers/FindAllUsersController';
 import { UpdateUserAvatarController } from '../useCases/UpdateUserAvatar/UpdateUserAvatarController';
@@ -21,9 +19,8 @@ usersRouter.post('/', createUserController.handle);
 
 usersRouter.patch(
   '/avatar',
-  ensureAuthenticated,
   uploadAvatar.single('avatar'),
   updateUserAvatarController.handle,
 );
 
-usersRouter.get('/', ensureAuthenticated, findAllUsersController.handle);
+usersRouter.get('/', findAllUsersController.handle);
