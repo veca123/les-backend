@@ -8,7 +8,8 @@
     "pm": "prisma migrate dev",
     "pd": "prisma migrate deploy",
     "pg": "prisma generate",
-    "ps": "prisma studio"
+    "ps": "prisma studio",
+    "start": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --exit-child --ignore-watch node_modules --respawn src/shared/infra/server.ts"
   },
   "dependencies": {
     "@prisma/client": "^4.1.1",
