@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import 'express-async-errors';
 import '@shared/container';
 import { customCss } from '@utils/swaggerCss';
+import cors from 'cors';
 import express, { Request, Response, NextFunction, json } from 'express';
 import swaggerUi from 'swagger-ui-express';
 
@@ -21,6 +22,7 @@ app.use(
     customSiteTitle: 'PlayGames API',
   }),
 );
+app.use(cors());
 
 app.use(routes);
 
