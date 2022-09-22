@@ -2,6 +2,8 @@ import { Event } from '@prisma/client';
 
 import { prisma } from '@shared/infra/prisma';
 
+import { IAddTeamToEventDTO } from '@modules/event/useCases/AddTeamToEvent/AddTeamToEventUseCase';
+
 import { ICreateEventDTO } from '../EventsDTO';
 import { IEventsRepository } from '../IEventsRepository';
 
@@ -64,5 +66,25 @@ export class EventsRepository implements IEventsRepository {
         id,
       },
     });
+  }
+
+  public async addTeam({ teamId, eventId }: IAddTeamToEventDTO): Promise<Event> {
+    const event = await this.ormRepository.update({
+      where: {
+        id: eventId,
+      },
+      data: {
+        teams: {
+          connect: {
+            id: teamId,
+          },
+        },
+      },
+      include: {
+        teams: true,
+      },
+    });
+
+    return event;
   }
 }
