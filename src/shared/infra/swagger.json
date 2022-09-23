@@ -229,7 +229,7 @@
         "summary": "Find a Team By Name",
         "parameters": [
           {
-            "name": "name",
+            "name": "teamName",
             "in": "query",
             "description": "Team name",
             "required": true,
@@ -484,11 +484,11 @@
           },
           "name": {
             "type": "string",
-            "example": "User"
+            "example": "Team"
           },
           "description": {
             "type": "string",
-            "example": "User"
+            "example": "Team"
           },
           "createdAt": {
             "type": "string",
