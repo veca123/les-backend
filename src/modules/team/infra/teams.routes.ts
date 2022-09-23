@@ -16,4 +16,4 @@ teamsRouter.post('/', createTeamController.handle);
 teamsRouter.post('/addUser', addUserToTeamController.handle);
 
 teamsRouter.get('/', findAllTeamsController.handle);
-teamsRouter.get('/', findTeamByNameController.handle);
+teamsRouter.get('/findTeamByName', findTeamByNameController.handle);
