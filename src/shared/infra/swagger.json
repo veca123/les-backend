@@ -227,16 +227,17 @@
           "Team"
         ],
         "summary": "Find a Team By Name",
-        "parameters": 
-        {
-            "name": "teamName",
+        "parameters": [
+          {
+            "name": "name",
             "in": "query",
+            "description": "Team name",
             "required": true,
-            "description": "Team Name",
             "schema": {
               "type": "string"
             }
-        },
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
