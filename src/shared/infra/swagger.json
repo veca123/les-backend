@@ -477,11 +477,11 @@
           },
           "name": {
             "type": "string",
-            "example": "User"
+            "example": "Event"
           },
           "description": {
             "type": "string",
-            "example": "User"
+            "example": "Event"
           },
           "teamsLimit": {
             "type": "number",
