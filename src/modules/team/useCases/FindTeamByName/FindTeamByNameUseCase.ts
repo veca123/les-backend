@@ -10,7 +10,7 @@ export class FindTeamByNameUseCase {
     @inject('TeamsRepository')
     private teamsRepository: ITeamsRepository,
   ) {}
-  public async execute({teamName}): Promise<Team[]> {
+  public async execute({teamName}): Promise<Team> {
 
     const teamExists = await this.teamsRepository.findByName(teamName);
     if (!teamExists) throw new AppError('Team not found');

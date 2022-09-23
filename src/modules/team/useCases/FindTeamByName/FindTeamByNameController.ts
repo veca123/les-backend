@@ -8,10 +8,10 @@ export class FindTeamByNameController {
     const teamName  = request.query;
     const findTeamByNameUseCase = container.resolve(FindTeamByNameUseCase);
 
-    const team = await findTeamByNameUseCase.execute({
+    const teamResponse = await findTeamByNameUseCase.execute({
       teamName : String(teamName)
     });
 
-    return response.json(team);
+    return response.json(teamResponse);
   }
 }
