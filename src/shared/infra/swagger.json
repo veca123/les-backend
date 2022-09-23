@@ -221,6 +221,39 @@
         }
       }
     },
+    "/teams/findByName":{
+      "get":{
+        "tags": [
+          "Team"
+        ],
+        "summary": "Find a Team By Name",
+        "parameters": 
+        {
+            "name": "teamName",
+            "in": "query",
+            "required": true,
+            "description": "Team Name",
+            "schema": {
+              "type": "string"
+            }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Team"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/teams/addUser":{
       "post":{
         "tags": [
