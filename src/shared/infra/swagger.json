@@ -221,7 +221,7 @@
         }
       }
     },
-    "/teams/findByName":{
+    "/teams/findTeamByName":{
       "get":{
         "tags": [
           "Team"
