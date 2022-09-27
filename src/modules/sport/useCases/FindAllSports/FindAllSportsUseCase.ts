@@ -1,4 +1,3 @@
-import { Sport } from '@prisma/client';
 import { inject, injectable } from 'tsyringe';
 
 import { ISportsRepository } from '@modules/sport/repositories/ISportsRepository';
@@ -9,7 +8,12 @@ export class FindAllSportsUseCase {
     @inject('SportsRepository')
     private sportsRepository: ISportsRepository,
   ) {}
-  public async execute(): Promise<Sport[]> {
+  public async execute(): Promise<
+    {
+      id: string;
+      name: string;
+    }[]
+  > {
     const sports = await this.sportsRepository.findAll();
 
     return sports;
