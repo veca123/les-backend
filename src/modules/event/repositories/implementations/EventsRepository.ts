@@ -68,7 +68,10 @@ export class EventsRepository implements IEventsRepository {
     });
   }
 
-  public async addTeam({ teamId, eventId }: IAddTeamToEventDTO): Promise<Event> {
+  public async addTeam({
+    teamId,
+    eventId,
+  }: IAddTeamToEventDTO): Promise<Event> {
     const event = await this.ormRepository.update({
       where: {
         id: eventId,

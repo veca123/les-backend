@@ -4,6 +4,7 @@ import multer from 'multer';
 import uploadConfig from '@config/upload';
 
 import { CreateUserController } from '../useCases/CreateUser/CreateUserController';
+import { DisplayMeController } from '../useCases/DisplayMe/DisplayMeController';
 import { FindAllUsersController } from '../useCases/FindAllUsers/FindAllUsersController';
 import { UpdateUserAvatarController } from '../useCases/UpdateUserAvatar/UpdateUserAvatarController';
 
@@ -14,6 +15,7 @@ const uploadAvatar = multer(uploadConfig.upload('avatar'));
 const createUserController = new CreateUserController();
 const updateUserAvatarController = new UpdateUserAvatarController();
 const findAllUsersController = new FindAllUsersController();
+const displayMeController = new DisplayMeController();
 
 usersRouter.post('/', createUserController.handle);
 
@@ -24,3 +26,4 @@ usersRouter.patch(
 );
 
 usersRouter.get('/', findAllUsersController.handle);
+usersRouter.get('/me/:id', displayMeController.handle);

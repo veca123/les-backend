@@ -5,7 +5,7 @@ import { CreateEventUseCase } from './CreateEventUseCase';
 
 export class CreateEventController {
   async handle(request: Request, response: Response): Promise<Response> {
-    const { name, description, date, teamsLimit, locationId, sportId } =
+    const { name, description, date, teamsLimit, location, sportId } =
       request.body;
 
     const createEventUseCase = container.resolve(CreateEventUseCase);
@@ -15,7 +15,7 @@ export class CreateEventController {
       description,
       date,
       teamsLimit,
-      locationId,
+      location,
       sportId,
     });
 

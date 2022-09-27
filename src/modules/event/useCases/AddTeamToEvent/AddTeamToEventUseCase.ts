@@ -3,8 +3,8 @@ import { inject, injectable } from 'tsyringe';
 
 import { AppError } from '@shared/errors/AppError';
 
-import { ITeamsRepository } from '@modules/team/repositories/ITeamsRepository';
 import { IEventsRepository } from '@modules/event/repositories/IEventsRepository';
+import { ITeamsRepository } from '@modules/team/repositories/ITeamsRepository';
 
 export interface IAddTeamToEventDTO {
   teamId: string;

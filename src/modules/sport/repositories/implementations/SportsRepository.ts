@@ -18,10 +18,11 @@ export class SportsRepository implements ISportsRepository {
     return sport;
   }
 
-  public async findAll(): Promise<Sport[]> {
+  public async findAll(): Promise<{ id: string; name: string }[]> {
     const categories = await this.ormRepository.findMany({
-      include: {
-        events: true,
+      select: {
+        id: true,
+        name: true,
       },
     });
 

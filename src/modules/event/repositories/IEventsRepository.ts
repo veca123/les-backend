@@ -1,7 +1,6 @@
 import { Event } from '@prisma/client';
 
 import { IAddTeamToEventDTO } from '../useCases/AddTeamToEvent/AddTeamToEventUseCase';
-
 import { ICreateEventDTO } from './EventsDTO';
 
 export interface IEventsRepository {

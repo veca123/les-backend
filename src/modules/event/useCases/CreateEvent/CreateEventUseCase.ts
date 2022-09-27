@@ -13,12 +13,39 @@ export class CreateEventUseCase {
     private categoriesRepository: IEventsRepository,
   ) {}
 
-  public async execute(data: ICreateEventDTO): Promise<Event> {
-    if (!data.date || !data.description || !data.teamsLimit || !data.name) {
-      throw new AppError('Invalid data');
+  public async execute({
+    date,
+    description,
+    location,
+    name,
+    teamsLimit,
+    sportId,
+  }: ICreateEventDTO): Promise<Event> {
+    if (
+      !date ||
+      !description ||
+      !teamsLimit ||
+      !name ||
+      !location ||
+      !sportId
+    ) {
+      throw new AppError(
+        `Missing data: ${!date ? 'date, ' : ''}${
+          !description ? 'description, ' : ''
+        }${!teamsLimit ? 'teamsLimit, ' : ''}${!name ? 'name, ' : ''}${
+          !location ? 'location, ' : ''
+        }${!sportId ? 'sportId' : ''}`,
+      );
     }
 
-    const event = this.categoriesRepository.create(data);
+    const event = this.categoriesRepository.create({
+      date,
+      description,
+      location,
+      name,
+      teamsLimit,
+      sportId,
+    });
 
     return event;
   }

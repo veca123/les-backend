@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL") 
+  url      = env("DATABASE_URL")
   //"postgresql://les-backend:les-backend@localhost:5432/les-backend?schema=public"
 }
 
@@ -51,8 +51,6 @@ model Location {
   city   String
   state  String
 
-  events Event[]
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -63,11 +61,10 @@ model Event {
   description String
   date        DateTime
   teamsLimit  Int
+  location    String?
 
-  sportId    String?
-  Sport      Sport?    @relation(fields: [sportId], references: [id])
-  locationId String?
-  Location   Location? @relation(fields: [locationId], references: [id])
+  sportId String?
+  Sport   Sport?  @relation(fields: [sportId], references: [id])
 
   teams Team[]
 

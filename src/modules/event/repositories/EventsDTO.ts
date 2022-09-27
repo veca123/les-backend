@@ -3,6 +3,6 @@ export interface ICreateEventDTO {
   description: string;
   date: Date;
   teamsLimit: number;
+  location: string;
   sportId?: string;
-  locationId?: string;
 }
