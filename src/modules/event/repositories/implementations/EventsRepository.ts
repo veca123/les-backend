@@ -26,7 +26,6 @@ export class EventsRepository implements IEventsRepository {
   public async findAll(): Promise<Event[]> {
     const events = await this.ormRepository.findMany({
       include: {
-        Location: true,
         Sport: true,
         teams: true,
       },
@@ -51,7 +50,6 @@ export class EventsRepository implements IEventsRepository {
         id,
       },
       include: {
-        Location: true,
         Sport: true,
         teams: true,
       },
