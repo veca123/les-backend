@@ -621,7 +621,7 @@
             "type": "number",
             "example": 2
           },
-          "date": {
+          "day": {
             "type": "string",
             "example": "2020-01-01"
           },
@@ -728,7 +728,7 @@
             "type": "number",
             "example": 2
           },
-          "date": {
+          "day": {
             "type": "string",
             "example": "2020-01-01"
           },
