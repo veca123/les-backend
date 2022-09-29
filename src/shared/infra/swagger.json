@@ -623,8 +623,11 @@
           },
           "date": {
             "type": "string",
-            "format": "date-time",
-            "example": "2020-01-01T00:00:00.000Z"
+            "example": "2020-01-01"
+          },
+          "time": {
+            "type": "string",
+            "example": "00:00"
           },
           "location": {
             "type": "string",
@@ -727,8 +730,11 @@
           },
           "date": {
             "type": "string",
-            "format": "date-time",
-            "example": "2020-01-01T00:00:00.000Z"
+            "example": "2020-01-01"
+          },
+          "time":{
+            "type": "string",
+            "example": "00:00"
           },
           "location": {
             "type": "string",

@@ -18,6 +18,7 @@ export class CreateEventUseCase {
 
   public async execute({
     date,
+    time,
     description,
     location,
     name,
@@ -30,14 +31,15 @@ export class CreateEventUseCase {
       !teamsLimit ||
       !name ||
       !location ||
-      !sportId
+      !sportId ||
+      !time
     ) {
       throw new AppError(
         `Missing data: ${!date ? 'date, ' : ''}${
           !description ? 'description, ' : ''
         }${!teamsLimit ? 'teamsLimit, ' : ''}${!name ? 'name, ' : ''}${
           !location ? 'location, ' : ''
-        }${!sportId ? 'sportId' : ''}`,
+        }${!sportId ? 'sportId' : ''}${!time ? 'time' : ''}`,
       );
     }
 
@@ -49,6 +51,7 @@ export class CreateEventUseCase {
 
     const event = this.categoriesRepository.create({
       date,
+      time,
       description,
       location,
       name,

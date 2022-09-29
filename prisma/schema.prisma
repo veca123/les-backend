@@ -44,10 +44,11 @@ model Sport {
 }
 
 model Event {
-  id          String   @id @default(uuid())
+  id          String  @id @default(uuid())
   name        String
   description String
-  date        DateTime
+  day         String?
+  time        String?
   teamsLimit  Int
   location    String?
 
