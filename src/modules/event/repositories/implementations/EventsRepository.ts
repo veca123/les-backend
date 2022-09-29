@@ -14,7 +14,6 @@ export class EventsRepository implements IEventsRepository {
     const event = await this.ormRepository.create({
       data,
       include: {
-        Location: true,
         Sport: true,
         teams: true,
       },

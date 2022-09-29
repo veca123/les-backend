@@ -1,6 +1,6 @@
 import { app } from './app';
 
-app.listen(process.env.PORT || 3333, () => {
+app.listen(process.env.PORT || 3335, () => {
   console.log(
     `🚀 ~ file: server.ts ~ port ${process.env.PORT ? process.env.PORT : 3333}`,
   );
