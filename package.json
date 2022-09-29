@@ -11,7 +11,8 @@
     "ps": "prisma studio",
     "build": "tsc --project tsconfig.json  && tscpaths -p tsconfig.json -s ./src -o ./dist",
     "postinstall": "npm run build",
-    "start": "node dist/shared/infra/server.js"
+    "start": "node dist/shared/infra/server.js",
+    "heroku-postbuild": "yarn prisma migrate dev"
   },
   "dependencies": {
     "@prisma/client": "^4.1.1",
