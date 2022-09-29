@@ -34,6 +34,16 @@ export class UsersRepository implements IUsersRepository {
     return user;
   }
 
+  public async findByName(name: string): Promise<User | undefined> {
+    const user = await this.ormRepository.findFirst({
+      where: {
+        name,
+      },
+    });
+
+    return user;
+  }
+
   public async findAll(): Promise<User[]> {
     const users = await this.ormRepository.findMany();
 

@@ -158,6 +158,74 @@
         }
       }
     },
+    "/users/findUserByName": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Find a User By Name",
+        "parameters": [
+          {
+            "name": "userName",
+            "in": "query",
+            "description": "User name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/findUserByEmail": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Find a User By Email",
+        "parameters": [
+          {
+            "name": "userEmail",
+            "in": "query",
+            "description": "User email",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/users/avatar": {
       "patch": {
         "tags": [
