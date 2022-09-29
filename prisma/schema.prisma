@@ -4,7 +4,8 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://les-backend:les-backend@localhost:5432/les-backend?schema=public"
+  url      = env("DATABASE_URL")
+  // url      = "postgresql://les-backend:les-backend@localhost:5432/les-backend?schema=public"
 }
 
 model User {
