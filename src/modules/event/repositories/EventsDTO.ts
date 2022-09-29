@@ -1,7 +1,7 @@
 export interface ICreateEventDTO {
   name: string;
   description: string;
-  date: string;
+  day: string;
   time: string;
   teamsLimit: number;
   location: string;

@@ -17,7 +17,7 @@ export class CreateEventUseCase {
   ) {}
 
   public async execute({
-    date,
+    day,
     time,
     description,
     location,
@@ -26,7 +26,7 @@ export class CreateEventUseCase {
     sportId,
   }: ICreateEventDTO): Promise<Event> {
     if (
-      !date ||
+      !day ||
       !description ||
       !teamsLimit ||
       !name ||
@@ -35,7 +35,7 @@ export class CreateEventUseCase {
       !time
     ) {
       throw new AppError(
-        `Missing data: ${!date ? 'date, ' : ''}${
+        `Missing data: ${!day ? 'day, ' : ''}${
           !description ? 'description, ' : ''
         }${!teamsLimit ? 'teamsLimit, ' : ''}${!name ? 'name, ' : ''}${
           !location ? 'location, ' : ''
@@ -50,7 +50,7 @@ export class CreateEventUseCase {
     }
 
     const event = this.categoriesRepository.create({
-      date,
+      day,
       time,
       description,
       location,
