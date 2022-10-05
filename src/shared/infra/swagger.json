@@ -111,6 +111,11 @@
           "User"
         ],
         "summary": "Get all users",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
