@@ -6,9 +6,9 @@ import { IUsersRepository } from '@modules/user/repositories/IUsersRepository';
 @injectable()
 export class RejectInvitationUseCase {
   constructor(
-    @inject('usersRepository')
+    @inject('UsersRepository')
     private usersRepository: IUsersRepository,
-    @inject('eventsRepository')
+    @inject('EventsRepository')
     private eventsRepository: IEventsRepository,
   ) {}
   public async execute({ userId, eventId }): Promise<void> {
