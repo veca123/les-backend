@@ -23,4 +23,5 @@ export interface IEventsRepository {
   findByName(name: string): Promise<Event | undefined>;
   delete(id: string): Promise<void>;
   addTeam({ teamId, eventId }: IAddTeamToEventDTO): Promise<Event>;
+  findMyEvents(userId: string): Promise<FindAll>;
 }

@@ -622,6 +622,55 @@
         }
       }
     },
+    "/events/myEvents/{id}":{
+      "get": {
+        "tags": [
+          "Event"
+        ],
+        "summary": "Get my events",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/Event"
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "Sport": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/Sport"
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/events/addTeam": {
       "post": {
         "tags": [
