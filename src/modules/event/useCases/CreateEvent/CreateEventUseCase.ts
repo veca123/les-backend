@@ -7,6 +7,8 @@ import { ICreateEventDTO } from '@modules/event/repositories/EventsDTO';
 import { IEventsRepository } from '@modules/event/repositories/IEventsRepository';
 import { ISportsRepository } from '@modules/sport/repositories/ISportsRepository';
 
+import { IUsersRepository } from '../../../user/repositories/IUsersRepository';
+
 @injectable()
 export class CreateEventUseCase {
   constructor(
@@ -14,6 +16,8 @@ export class CreateEventUseCase {
     private categoriesRepository: IEventsRepository,
     @inject('SportsRepository')
     private sportsRepository: ISportsRepository,
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository,
   ) {}
 
   public async execute({
@@ -24,6 +28,7 @@ export class CreateEventUseCase {
     name,
     teamsLimit,
     sportId,
+    createdBy,
   }: ICreateEventDTO): Promise<Event> {
     if (
       !day ||
@@ -32,15 +37,23 @@ export class CreateEventUseCase {
       !name ||
       !location ||
       !sportId ||
-      !time
+      !time ||
+      !createdBy
     ) {
       throw new AppError(
         `Missing data: ${!day ? 'day, ' : ''}${
           !description ? 'description, ' : ''
         }${!teamsLimit ? 'teamsLimit, ' : ''}${!name ? 'name, ' : ''}${
           !location ? 'location, ' : ''
-        }${!sportId ? 'sportId' : ''}${!time ? 'time' : ''}`,
+        }${!sportId ? 'sportId' : ''}${!time ? 'time' : ''}
+        ${!createdBy ? 'createdBy' : ''}`,
       );
+    }
+
+    const user = await this.usersRepository.findById(createdBy);
+
+    if (!user) {
+      throw new AppError('User not found');
     }
 
     const sport = await this.sportsRepository.findById(sportId);
@@ -57,6 +70,7 @@ export class CreateEventUseCase {
       name,
       teamsLimit,
       sportId,
+      createdBy,
     });
 
     return event;

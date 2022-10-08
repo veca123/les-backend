@@ -5,6 +5,11 @@ import { prisma } from '@shared/infra/prisma';
 import { IUsersRepository } from '../IUsersRepository';
 import { ICreateUserDTO, IUpdateAvatarDTO } from '../UsersDTO';
 
+interface IInvitation {
+  userId: string;
+  eventId: string;
+}
+
 export class UsersRepository implements IUsersRepository {
   private ormRepository = prisma.user;
 
@@ -74,5 +79,61 @@ export class UsersRepository implements IUsersRepository {
     });
 
     return user;
+  }
+
+  public async sendInvitation({ userId, eventId }: IInvitation): Promise<void> {
+    await this.ormRepository.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        requested: {
+          connect: {
+            id: eventId,
+          },
+        },
+      },
+    });
+  }
+
+  public async acceptInvitation({
+    userId,
+    eventId,
+  }: IInvitation): Promise<void> {
+    await this.ormRepository.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        requested: {
+          disconnect: {
+            id: eventId,
+          },
+        },
+        accepted: {
+          connect: {
+            id: eventId,
+          },
+        },
+      },
+    });
+  }
+
+  public async rejectInvitation({
+    userId,
+    eventId,
+  }: IInvitation): Promise<void> {
+    await this.ormRepository.update({
+      where: {
+        id: userId,
+      },
+      data: {
+        requested: {
+          disconnect: {
+            id: eventId,
+          },
+        },
+      },
+    });
   }
 }

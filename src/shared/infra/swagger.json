@@ -133,6 +133,126 @@
         }
       }
     },
+    "/users/acceptInvitation": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Accept invitation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/reqBody/Invitation"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Invitation not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/users/rejectInvitation": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Decline invitation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/reqBody/Invitation"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Invitation not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/users/sendInvitation": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Send invitation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/reqBody/Invitation"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Invitation not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
     "/users/me/{id}": {
       "get": {
         "tags": [
@@ -805,7 +925,7 @@
             "type": "string",
             "example": "2020-01-01"
           },
-          "time":{
+          "time": {
             "type": "string",
             "example": "00:00"
           },
@@ -814,6 +934,10 @@
             "example": "Praia de camburi"
           },
           "sportId": {
+            "type": "string",
+            "example": "86633558-9689-4c71-93c9-3f306de4c4a7"
+          },
+          "createdBy": {
             "type": "string",
             "example": "86633558-9689-4c71-93c9-3f306de4c4a7"
           }
@@ -825,6 +949,19 @@
           "name": {
             "type": "string",
             "example": "Test"
+          }
+        }
+      },
+      "Invitation": {
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "string",
+            "example": "86633558-9689-4c71-93c9-3f306de4c4a7"
+          },
+          "userId": {
+            "type": "string",
+            "example": "86633558-9689-4c71-93c9-3f306de4c4a7"
           }
         }
       }

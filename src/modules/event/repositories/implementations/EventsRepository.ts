@@ -1,4 +1,4 @@
-import { Event } from '@prisma/client';
+import { Event, Sport, Team } from '@prisma/client';
 
 import { prisma } from '@shared/infra/prisma';
 
@@ -7,25 +7,64 @@ import { IAddTeamToEventDTO } from '@modules/event/useCases/AddTeamToEvent/AddTe
 import { ICreateEventDTO } from '../EventsDTO';
 import { IEventsRepository } from '../IEventsRepository';
 
+type FindAll = (Event & {
+  Sport: Sport;
+  teams: Team[];
+  requests: {
+    name: string;
+    id: string;
+  }[];
+  attendees: {
+    name: string;
+    id: string;
+  }[];
+})[];
+
 export class EventsRepository implements IEventsRepository {
   private ormRepository = prisma.event;
 
-  public async create(data: ICreateEventDTO): Promise<Event> {
+  public async create({
+    createdBy,
+    day,
+    description,
+    location,
+    name,
+    teamsLimit,
+    time,
+    sportId,
+  }: ICreateEventDTO): Promise<Event> {
     const event = await this.ormRepository.create({
-      data,
-      include: {
-        Sport: true,
-        teams: true,
+      data: {
+        createdBy,
+        day,
+        description,
+        location,
+        name,
+        teamsLimit,
+        time,
+        sportId,
       },
     });
 
     return event;
   }
 
-  public async findAll(): Promise<Event[]> {
+  public async findAll(): Promise<FindAll> {
     const events = await this.ormRepository.findMany({
       include: {
         Sport: true,
+        attendees: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+        requests: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
         teams: true,
       },
     });

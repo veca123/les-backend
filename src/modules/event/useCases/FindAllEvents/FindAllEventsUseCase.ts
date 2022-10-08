@@ -12,6 +12,17 @@ export class FindAllEventsUseCase {
   public async execute(): Promise<Event[]> {
     const events = await this.eventsRepository.findAll();
 
-    return events;
+    try {
+      const futureEvents = events.filter(event => {
+        const eventDate = new Date(event.day);
+        const currentDate = new Date();
+
+        return eventDate > currentDate;
+      });
+
+      return futureEvents;
+    } catch (error) {
+      return events;
+    }
   }
 }
