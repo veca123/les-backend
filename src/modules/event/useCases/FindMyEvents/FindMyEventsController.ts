@@ -5,7 +5,7 @@ import { FindMyEventsUseCase } from './FindMyEventsUseCase';
 
 export class FindMyEventsController {
   public async handle(request: Request, response: Response): Promise<Response> {
-    const { id } = request.user;
+    const { id } = request.params;
 
     const findMyEventsUseCase = container.resolve(FindMyEventsUseCase);
 
