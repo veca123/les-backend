@@ -23,3 +23,14 @@ export type FindAll = (Event & {
     id: string;
   }[];
 })[];
+
+export interface IUpdateEventDTO {
+  id: string;
+  name: string;
+  description: string;
+  day: string;
+  time: string;
+  teamsLimit: number;
+  location: string;
+  sportId?: string;
+}

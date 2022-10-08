@@ -622,7 +622,63 @@
         }
       }
     },
-    "/events/myEvents/{id}":{
+    "/events/{id}": {
+      "put": {
+        "tags": [
+          "Event"
+        ],
+        "summary": "Update event by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Event ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/reqBody/UpdateEvent"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Event"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "Sport": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Sport"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/events/myEvents/{id}": {
       "get": {
         "tags": [
           "Event"
@@ -1009,6 +1065,39 @@
             "example": "86633558-9689-4c71-93c9-3f306de4c4a7"
           },
           "userId": {
+            "type": "string",
+            "example": "86633558-9689-4c71-93c9-3f306de4c4a7"
+          }
+        }
+      },
+      "UpdateEvent": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Test"
+          },
+          "description": {
+            "type": "string",
+            "example": "Test"
+          },
+          "teamsLimit": {
+            "type": "number",
+            "example": 2
+          },
+          "day": {
+            "type": "string",
+            "example": "2020-01-01"
+          },
+          "time": {
+            "type": "string",
+            "example": "00:00"
+          },
+          "location": {
+            "type": "string",
+            "example": "Praia de camburi"
+          },
+          "sportId": {
             "type": "string",
             "example": "86633558-9689-4c71-93c9-3f306de4c4a7"
           }

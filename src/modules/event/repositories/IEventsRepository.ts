@@ -1,7 +1,7 @@
 import { Event, Sport, Team } from '@prisma/client';
 
 import { IAddTeamToEventDTO } from '../useCases/AddTeamToEvent/AddTeamToEventUseCase';
-import { ICreateEventDTO } from './EventsDTO';
+import { ICreateEventDTO, IUpdateEventDTO } from './EventsDTO';
 
 type FindAll = (Event & {
   Sport: Sport;
@@ -24,4 +24,5 @@ export interface IEventsRepository {
   delete(id: string): Promise<void>;
   addTeam({ teamId, eventId }: IAddTeamToEventDTO): Promise<Event>;
   findMyEvents(userId: string): Promise<FindAll>;
+  update(data: IUpdateEventDTO): Promise<Event>;
 }

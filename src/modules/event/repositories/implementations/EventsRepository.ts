@@ -4,7 +4,7 @@ import { prisma } from '@shared/infra/prisma';
 
 import { IAddTeamToEventDTO } from '@modules/event/useCases/AddTeamToEvent/AddTeamToEventUseCase';
 
-import { ICreateEventDTO } from '../EventsDTO';
+import { ICreateEventDTO, IUpdateEventDTO } from '../EventsDTO';
 import { IEventsRepository } from '../IEventsRepository';
 
 type FindAll = (Event & {
@@ -151,5 +151,33 @@ export class EventsRepository implements IEventsRepository {
     });
 
     return events;
+  }
+
+  public async update({
+    day,
+    time,
+    description,
+    location,
+    name,
+    teamsLimit,
+    sportId,
+    id,
+  }: IUpdateEventDTO): Promise<Event> {
+    const event = await this.ormRepository.update({
+      where: {
+        id,
+      },
+      data: {
+        day,
+        time,
+        description,
+        location,
+        name,
+        teamsLimit,
+        sportId,
+      },
+    });
+
+    return event;
   }
 }

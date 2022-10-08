@@ -4,6 +4,7 @@ import { AddTeamToEventController } from '../useCases/AddTeamToEvent/AddTeamToEv
 import { CreateEventController } from '../useCases/CreateEvent/CreateEventController';
 import { FindAllEventsController } from '../useCases/FindAllEvents/FindAllEventsController';
 import { FindMyEventsController } from '../useCases/FindMyEvents/FindMyEventsController';
+import { UpdateEventController } from '../useCases/UpdateEvent/UpdateEventController';
 
 export const eventsRouter = Router();
 
@@ -11,8 +12,11 @@ const createEventController = new CreateEventController();
 const addTeamToEventController = new AddTeamToEventController();
 const findAllEventsController = new FindAllEventsController();
 const findMyEventsController = new FindMyEventsController();
+const updateEventController = new UpdateEventController();
 
 eventsRouter.post('/', createEventController.handle);
 eventsRouter.post('/addTeam', addTeamToEventController.handle);
 eventsRouter.get('/', findAllEventsController.handle);
 eventsRouter.get('/myEvents/:id', findMyEventsController.handle);
+
+eventsRouter.put('/:id', updateEventController.handle);
