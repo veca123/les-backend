@@ -676,6 +676,28 @@
             }
           }
         }
+      },
+      "delete":{
+        "tags": [
+          "Event"
+        ],
+        "summary": "Delete event by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Event ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/events/myEvents/{id}": {
