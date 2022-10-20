@@ -11,6 +11,6 @@ export class TeamInvitationController {
 
     await teamInvitationUseCase.execute({ userId, teamId, invitation });
 
-    return response.json({ message: 'Hello World!' });
+    return response.status(201).send();
   }
 }

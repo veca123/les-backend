@@ -11,4 +11,5 @@ export interface ITeamsRepository {
   delete(id: string): Promise<void>;
   addUser({ userId, teamId }: IAddUserToTeamDTO): Promise<Team>;
   findMyTeams(userId: string): Promise<Team[]>;
+  findTeamsImIn(userId: string): Promise<Team[]>;
 }

@@ -266,6 +266,7 @@
           "User"
         ],
         "summary": "Send team invitation",
+        "description": "Enviar convite para um equipe. Aceitar ou recusar um convite como administrador da equipe.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -354,17 +355,16 @@
         }
       }
     },
-    "/teams/findTeamByName": {
+    "/teams/findMyTeams/{userId}": {
       "get": {
         "tags": [
           "Team"
         ],
-        "summary": "Find a Team By Name",
+        "summary": "Buscar times que sou administrador",
         "parameters": [
           {
-            "name": "teamName",
-            "in": "query",
-            "description": "Team name",
+            "name": "userId",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string"
@@ -388,12 +388,12 @@
         }
       }
     },
-    "/teams/findMyTeams/{userId}": {
+    "/teams/findTeamsImIn/{userId}": {
       "get": {
         "tags": [
           "Team"
         ],
-        "summary": "Find my teams",
+        "summary": "Buscar times que estou participando",
         "parameters": [
           {
             "name": "userId",
@@ -1011,7 +1011,7 @@
           }
         }
       },
-      "TeamInvitation":{
+      "TeamInvitation": {
         "type": "object",
         "properties": {
           "teamId": {
@@ -1022,7 +1022,7 @@
             "type": "string",
             "example": "86633558-9689-4c71-93c9-3f306de4c4a7"
           },
-          "invitation":{
+          "invitation": {
             "type": "string",
             "example": "send || accepted || rejected"
           }

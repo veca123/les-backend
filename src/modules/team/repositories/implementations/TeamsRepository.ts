@@ -97,4 +97,22 @@ export class TeamsRepository implements ITeamsRepository {
 
     return teams;
   }
+
+  public async findTeamsImIn(userId: string): Promise<Team[]> {
+    const teams = await this.ormRepository.findMany({
+      where: {
+        users: {
+          some: {
+            id: userId,
+          },
+        },
+      },
+      include: {
+        users: true,
+        invitations: true,
+      },
+    });
+
+    return teams;
+  }
 }
