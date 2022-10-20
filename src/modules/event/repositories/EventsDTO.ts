@@ -1,5 +1,3 @@
-import { Sport, Team } from '@prisma/client';
-
 export interface ICreateEventDTO {
   name: string;
   description: string;
@@ -10,19 +8,6 @@ export interface ICreateEventDTO {
   sportId?: string;
   createdBy: string;
 }
-
-export type FindAll = (Event & {
-  Sport: Sport;
-  teams: Team[];
-  requests: {
-    name: string;
-    id: string;
-  }[];
-  attendees: {
-    name: string;
-    id: string;
-  }[];
-})[];
 
 export interface IUpdateEventDTO {
   id: string;

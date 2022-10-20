@@ -7,19 +7,6 @@ import { IAddTeamToEventDTO } from '@modules/event/useCases/AddTeamToEvent/AddTe
 import { ICreateEventDTO, IUpdateEventDTO } from '../EventsDTO';
 import { IEventsRepository } from '../IEventsRepository';
 
-type FindAll = (Event & {
-  Sport: Sport;
-  teams: Team[];
-  requests: {
-    name: string;
-    id: string;
-  }[];
-  attendees: {
-    name: string;
-    id: string;
-  }[];
-})[];
-
 export class EventsRepository implements IEventsRepository {
   private ormRepository = prisma.event;
 
@@ -49,22 +36,15 @@ export class EventsRepository implements IEventsRepository {
     return event;
   }
 
-  public async findAll(): Promise<FindAll> {
+  public async findAll(): Promise<
+    (Event & {
+      Sport: Sport;
+      teams: Team[];
+    })[]
+  > {
     const events = await this.ormRepository.findMany({
       include: {
         Sport: true,
-        attendees: {
-          select: {
-            id: true,
-            name: true,
-          },
-        },
-        requests: {
-          select: {
-            id: true,
-            name: true,
-          },
-        },
         teams: true,
       },
     });
@@ -127,25 +107,18 @@ export class EventsRepository implements IEventsRepository {
     return event;
   }
 
-  public async findMyEvents(userId: string): Promise<FindAll> {
+  public async findMyEvents(userId: string): Promise<
+    (Event & {
+      Sport: Sport;
+      teams: Team[];
+    })[]
+  > {
     const events = await this.ormRepository.findMany({
       where: {
         createdBy: userId,
       },
       include: {
         Sport: true,
-        attendees: {
-          select: {
-            id: true,
-            name: true,
-          },
-        },
-        requests: {
-          select: {
-            id: true,
-            name: true,
-          },
-        },
         teams: true,
       },
     });
