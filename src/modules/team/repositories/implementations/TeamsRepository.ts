@@ -9,11 +9,16 @@ import { ICreateTeamDTO } from '../TeamsDTO';
 export class TeamsRepository implements ITeamsRepository {
   private ormRepository = prisma.team;
 
-  public async create({ name, description }: ICreateTeamDTO): Promise<Team> {
+  public async create({
+    name,
+    description,
+    createdBy,
+  }: ICreateTeamDTO): Promise<Team> {
     const team = await this.ormRepository.create({
       data: {
         name,
         description,
+        createdBy,
       },
     });
 
@@ -77,5 +82,18 @@ export class TeamsRepository implements ITeamsRepository {
     });
 
     return team;
+  }
+
+  public async findMyTeams(userId: string): Promise<Team[]> {
+    const teams = await this.ormRepository.findMany({
+      where: {
+        createdBy: userId,
+      },
+      include: {
+        users: true,
+      },
+    });
+
+    return teams;
   }
 }

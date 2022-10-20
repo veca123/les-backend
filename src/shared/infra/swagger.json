@@ -133,126 +133,6 @@
         }
       }
     },
-    "/users/acceptInvitation": {
-      "post": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Accept invitation",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/reqBody/Invitation"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Invitation not found"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": []
-      }
-    },
-    "/users/rejectInvitation": {
-      "post": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Decline invitation",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/reqBody/Invitation"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Invitation not found"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": []
-      }
-    },
-    "/users/sendInvitation": {
-      "post": {
-        "tags": [
-          "User"
-        ],
-        "summary": "Send invitation",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/reqBody/Invitation"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Invitation not found"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": []
-      }
-    },
     "/users/me/{id}": {
       "get": {
         "tags": [
@@ -380,6 +260,32 @@
         }
       }
     },
+    "/users/teamInvitation": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Send team invitation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/reqBody/TeamInvitation"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
     "/teams": {
       "post": {
         "tags": [
@@ -482,26 +388,17 @@
         }
       }
     },
-    "/teams/addUser": {
-      "post": {
+    "/teams/findMyTeams/{userId}": {
+      "get": {
         "tags": [
           "Team"
         ],
-        "summary": "Add user to team",
+        "summary": "Find my teams",
         "parameters": [
-          {
-            "name": "teamId",
-            "in": "query",
-            "description": "Team ID",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
           {
             "name": "userId",
             "in": "query",
-            "description": "User ID",
+            "description": "User id",
             "required": true,
             "schema": {
               "type": "string"
@@ -509,34 +406,20 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created",
+          "200": {
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Team"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Team already exists"
-                    }
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Team"
                   }
                 }
               }
             }
           }
-        },
-        "security": []
+        }
       }
     },
     "/events": {
@@ -677,7 +560,7 @@
           }
         }
       },
-      "delete":{
+      "delete": {
         "tags": [
           "Event"
         ],
@@ -1030,6 +913,10 @@
           "description": {
             "type": "string",
             "example": "Test"
+          },
+          "createdBy": {
+            "type": "string",
+            "example": "86633558-9689-4c71-93c9-3f306de4c4a7"
           }
         }
       },
@@ -1122,6 +1009,23 @@
           "sportId": {
             "type": "string",
             "example": "86633558-9689-4c71-93c9-3f306de4c4a7"
+          }
+        }
+      },
+      "TeamInvitation":{
+        "type": "object",
+        "properties": {
+          "teamId": {
+            "type": "string",
+            "example": "86633558-9689-4c71-93c9-3f306de4c4a7"
+          },
+          "userId": {
+            "type": "string",
+            "example": "86633558-9689-4c71-93c9-3f306de4c4a7"
+          },
+          "invitation":{
+            "type": "string",
+            "example": "send || accepted || rejected"
           }
         }
       }

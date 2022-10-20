@@ -1,11 +1,6 @@
 import { User } from '@prisma/client';
 
-import { ICreateUserDTO, IUpdateAvatarDTO } from './UsersDTO';
-
-interface IInvitation {
-  userId: string;
-  eventId: string;
-}
+import { ICreateUserDTO, Invitation, IUpdateAvatarDTO } from './UsersDTO';
 
 export interface IUsersRepository {
   create(data: ICreateUserDTO): Promise<User>;
@@ -14,7 +9,9 @@ export interface IUsersRepository {
   findByName(name: string): Promise<User | undefined>;
   findById(id: string): Promise<User>;
   pathAvatar(data: IUpdateAvatarDTO): Promise<User>;
-  sendInvitation(data: IInvitation): Promise<void>;
-  acceptInvitation(data: IInvitation): Promise<void>;
-  rejectInvitation(data: IInvitation): Promise<void>;
+  handleInvitation(
+    userId: string,
+    teamId: string,
+    invitation: Invitation,
+  ): Promise<void>;
 }

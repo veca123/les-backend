@@ -6,8 +6,7 @@ import { AppError } from '@shared/errors/AppError';
 import { ICreateEventDTO } from '@modules/event/repositories/EventsDTO';
 import { IEventsRepository } from '@modules/event/repositories/IEventsRepository';
 import { ISportsRepository } from '@modules/sport/repositories/ISportsRepository';
-
-import { IUsersRepository } from '../../../user/repositories/IUsersRepository';
+import { IUsersRepository } from '@modules/user/repositories/IUsersRepository';
 
 @injectable()
 export class CreateEventUseCase {

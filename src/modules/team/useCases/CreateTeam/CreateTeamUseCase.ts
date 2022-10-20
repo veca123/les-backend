@@ -13,14 +13,22 @@ export class CreateTeamUseCase {
     private categoriesRepository: ITeamsRepository,
   ) {}
 
-  public async execute({ name, description }: ICreateTeamDTO): Promise<Team> {
+  public async execute({
+    name,
+    description,
+    createdBy,
+  }: ICreateTeamDTO): Promise<Team> {
     const teamAlreadyExists = await this.categoriesRepository.findByName(name);
 
     if (teamAlreadyExists) {
       throw new AppError('Team already exists');
     }
 
-    const category = this.categoriesRepository.create({ name, description });
+    const category = this.categoriesRepository.create({
+      name,
+      description,
+      createdBy,
+    });
 
     return category;
   }

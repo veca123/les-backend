@@ -3,12 +3,7 @@ import { User } from '@prisma/client';
 import { prisma } from '@shared/infra/prisma';
 
 import { IUsersRepository } from '../IUsersRepository';
-import { ICreateUserDTO, IUpdateAvatarDTO } from '../UsersDTO';
-
-interface IInvitation {
-  userId: string;
-  eventId: string;
-}
+import { ICreateUserDTO, IUpdateAvatarDTO, Invitation } from '../UsersDTO';
 
 export class UsersRepository implements IUsersRepository {
   private ormRepository = prisma.user;
@@ -81,59 +76,55 @@ export class UsersRepository implements IUsersRepository {
     return user;
   }
 
-  public async sendInvitation({ userId, eventId }: IInvitation): Promise<void> {
-    await this.ormRepository.update({
-      where: {
-        id: userId,
-      },
-      data: {
-        requested: {
-          connect: {
-            id: eventId,
+  public async handleInvitation(
+    userId: string,
+    teamId: string,
+    invitation: Invitation,
+  ): Promise<void> {
+    if (invitation === 'send') {
+      await this.ormRepository.update({
+        where: {
+          id: userId,
+        },
+        data: {
+          invitations: {
+            connect: {
+              id: teamId,
+            },
           },
         },
-      },
-    });
-  }
-
-  public async acceptInvitation({
-    userId,
-    eventId,
-  }: IInvitation): Promise<void> {
-    await this.ormRepository.update({
-      where: {
-        id: userId,
-      },
-      data: {
-        requested: {
-          disconnect: {
-            id: eventId,
+      });
+    } else if (invitation === 'accepted') {
+      await this.ormRepository.update({
+        where: {
+          id: userId,
+        },
+        data: {
+          teams: {
+            connect: {
+              id: teamId,
+            },
+          },
+          invitations: {
+            disconnect: {
+              id: teamId,
+            },
           },
         },
-        accepted: {
-          connect: {
-            id: eventId,
+      });
+    } else if (invitation === 'rejected') {
+      await this.ormRepository.update({
+        where: {
+          id: userId,
+        },
+        data: {
+          invitations: {
+            disconnect: {
+              id: teamId,
+            },
           },
         },
-      },
-    });
-  }
-
-  public async rejectInvitation({
-    userId,
-    eventId,
-  }: IInvitation): Promise<void> {
-    await this.ormRepository.update({
-      where: {
-        id: userId,
-      },
-      data: {
-        requested: {
-          disconnect: {
-            id: eventId,
-          },
-        },
-      },
-    });
+      });
+    }
   }
 }

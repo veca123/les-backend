@@ -13,3 +13,5 @@ export interface IUpdateAvatarDTO {
   id: string;
   avatarFileName: string;
 }
+
+export type Invitation = 'send' | 'accepted' | 'rejected';

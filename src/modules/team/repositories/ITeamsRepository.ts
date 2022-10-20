@@ -10,4 +10,5 @@ export interface ITeamsRepository {
   findByName(name: string): Promise<Team | undefined>;
   delete(id: string): Promise<void>;
   addUser({ userId, teamId }: IAddUserToTeamDTO): Promise<Team>;
+  findMyTeams(userId: string): Promise<Team[]>;
 }

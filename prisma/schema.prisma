@@ -20,8 +20,7 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  requested Event[] @relation("EventRequest")
-  accepted  Event[] @relation("EventAttendee")
+  invitations Team[] @relation("Invitations")
 }
 
 model Team {
@@ -29,11 +28,15 @@ model Team {
   name        String @unique
   description String
 
+  createdBy String
+
   users  User[]
   events Event[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  invitations User[] @relation("Invitations")
 }
 
 model Sport {
@@ -61,9 +64,6 @@ model Event {
   Sport   Sport?  @relation(fields: [sportId], references: [id])
 
   teams Team[]
-
-  requests  User[] @relation("EventRequest")
-  attendees User[] @relation("EventAttendee")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
