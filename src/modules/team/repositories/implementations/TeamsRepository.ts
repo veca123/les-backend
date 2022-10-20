@@ -91,6 +91,7 @@ export class TeamsRepository implements ITeamsRepository {
       },
       include: {
         users: true,
+        invitations: true,
       },
     });
 

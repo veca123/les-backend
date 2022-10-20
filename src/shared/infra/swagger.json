@@ -397,8 +397,7 @@
         "parameters": [
           {
             "name": "userId",
-            "in": "query",
-            "description": "User id",
+            "in": "path",
             "required": true,
             "schema": {
               "type": "string"
