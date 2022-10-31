@@ -45,7 +45,11 @@ export class EventsRepository implements IEventsRepository {
     const events = await this.ormRepository.findMany({
       include: {
         Sport: true,
-        teams: true,
+        teams: {
+          include: {
+            users: true,
+          },
+        },
       },
     });
 
