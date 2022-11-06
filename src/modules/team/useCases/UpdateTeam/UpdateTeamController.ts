@@ -8,7 +8,7 @@ export class UpdateTeamController {
     const { id } = request.params;
     const { name, description } = request.body;
 
-    const updateTeamUseCase = container.resolve(updateTeamUseCase);
+    const updateTeamUseCase = container.resolve(UpdateTeamUseCase);
 
     const category = await updateTeamUseCase.execute({
       id,
