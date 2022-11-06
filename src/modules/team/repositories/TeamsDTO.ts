@@ -3,3 +3,9 @@ export interface ICreateTeamDTO {
   description: string;
   createdBy: string;
 }
+
+export interface IUpdateTeamDTO {
+  id: string;
+  name?: string
+  description?: string
+}

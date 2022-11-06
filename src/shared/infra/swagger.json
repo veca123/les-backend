@@ -355,6 +355,47 @@
         }
       }
     },
+    "/teams/{id}": {
+      "put": {
+        "tags": [
+          "Team"
+        ],
+        "summary": "Update team by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Team ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/reqBody/UpdateTeam"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Team"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/teams/findMyTeams/{userId}": {
       "get": {
         "tags": [
@@ -1025,6 +1066,19 @@
           "invitation": {
             "type": "string",
             "example": "send || accepted || rejected"
+          }
+        }
+      },
+      "UpdateTeam": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Test"
+          },
+          "description": {
+            "type": "string",
+            "example": "Test"
           }
         }
       }

@@ -1,7 +1,7 @@
 import { Team } from '@prisma/client';
 
 import { IAddUserToTeamDTO } from '../useCases/AddUserToTeam/AddUserToTeamUseCase';
-import { ICreateTeamDTO } from './TeamsDTO';
+import { ICreateTeamDTO, IUpdateTeamDTO } from './TeamsDTO';
 
 export interface ITeamsRepository {
   create(data: ICreateTeamDTO): Promise<Team>;
@@ -12,4 +12,5 @@ export interface ITeamsRepository {
   addUser({ userId, teamId }: IAddUserToTeamDTO): Promise<Team>;
   findMyTeams(userId: string): Promise<Team[]>;
   findTeamsImIn(userId: string): Promise<Team[]>;
+  update(data: IUpdateTeamDTO): Promise<Team>;
 }

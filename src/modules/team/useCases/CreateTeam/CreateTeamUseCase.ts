@@ -10,7 +10,7 @@ import { ICreateTeamDTO } from '@modules/team/repositories/TeamsDTO';
 export class CreateTeamUseCase {
   constructor(
     @inject('TeamsRepository')
-    private categoriesRepository: ITeamsRepository,
+    private teamsRepository: ITeamsRepository,
   ) {}
 
   public async execute({
@@ -18,13 +18,13 @@ export class CreateTeamUseCase {
     description,
     createdBy,
   }: ICreateTeamDTO): Promise<Team> {
-    const teamAlreadyExists = await this.categoriesRepository.findByName(name);
+    const teamAlreadyExists = await this.teamsRepository.findByName(name);
 
     if (teamAlreadyExists) {
       throw new AppError('Team already exists');
     }
 
-    const category = this.categoriesRepository.create({
+    const category = this.teamsRepository.create({
       name,
       description,
       createdBy,

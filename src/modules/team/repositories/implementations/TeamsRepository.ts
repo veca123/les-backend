@@ -4,7 +4,7 @@ import { prisma } from '@shared/infra/prisma';
 
 import { IAddUserToTeamDTO } from '../../useCases/AddUserToTeam/AddUserToTeamUseCase';
 import { ITeamsRepository } from '../ITeamsRepository';
-import { ICreateTeamDTO } from '../TeamsDTO';
+import { ICreateTeamDTO, IUpdateTeamDTO } from '../TeamsDTO';
 
 export class TeamsRepository implements ITeamsRepository {
   private ormRepository = prisma.team;
@@ -114,5 +114,23 @@ export class TeamsRepository implements ITeamsRepository {
     });
 
     return teams;
+  }
+
+  public async update({
+    id,
+    name,
+    description,
+  }: IUpdateTeamDTO): Promise<Team> {
+    const team = await this.ormRepository.update({
+      where: {
+        id,
+      },
+      data: {
+        name,
+        description,
+      },
+    });
+
+    return team;
   }
 }
