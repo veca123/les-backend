@@ -18,7 +18,7 @@ export class UpdateTeamUseCase {
     name,
     description,
   }: IUpdateTeamDTO): Promise<Team> {
-    const team = await this.teamsRepository.findNyId(id);
+    const team = await this.teamsRepository.findById(id);
 
     if (!team) throw new AppError('Team not found');
 
