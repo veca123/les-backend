@@ -4,6 +4,13 @@ export interface ICreateUserDTO {
   password: string;
 }
 
+export interface IUpdateUserDTO {
+  id: string;
+  name?: string;
+  email?: string;
+  password?: string;
+}
+
 export interface IAuthenticateUserDTO {
   email: string;
   password: string;

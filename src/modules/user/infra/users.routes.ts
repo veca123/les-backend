@@ -9,6 +9,7 @@ import { FindAllUsersController } from '../useCases/FindAllUsers/FindAllUsersCon
 import { FindUserByEmailController } from '../useCases/FindUserByEmail/FindUserByEmailController';
 import { FindUserByNameController } from '../useCases/FindUserByName/FindUserByNameController';
 import { TeamInvitationController } from '../useCases/TeamInvitation/TeamInvitationController';
+import { UpdateUserController } from '../useCases/UpdateUser/UpdateUserController';
 import { UpdateUserAvatarController } from '../useCases/UpdateUserAvatar/UpdateUserAvatarController';
 
 export const usersRouter = Router();
@@ -22,6 +23,7 @@ const displayMeController = new DisplayMeController();
 const findUserByNameController = new FindUserByNameController();
 const findUserByEmailController = new FindUserByEmailController();
 const teamInvitationController = new TeamInvitationController();
+const updateUserController = new UpdateUserController();
 
 usersRouter.patch(
   '/avatar',
@@ -36,3 +38,5 @@ usersRouter.get('/findUserByEmail', findUserByEmailController.handle);
 
 usersRouter.post('/', createUserController.handle);
 usersRouter.post('/teamInvitation', teamInvitationController.handle);
+
+usersRouter.put('/:id', updateUserController.handle);
