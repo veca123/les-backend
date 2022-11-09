@@ -8,8 +8,8 @@ import swaggerUi from 'swagger-ui-express';
 
 import { AppError } from '@shared/errors/AppError';
 
-import { prisma } from './prisma';
 import { routes } from './routes';
+import { seed } from './seed';
 import swaggerFile from './swagger.json';
 
 export const app = express();
@@ -43,24 +43,4 @@ app.use(
   },
 );
 
-app.get('/seed', async (_request, _response) => {
-  await prisma.sport.deleteMany();
-  await prisma.sport.createMany({
-    data: [
-      {
-        name: 'Futebol',
-      },
-      {
-        name: 'Basquete',
-      },
-      {
-        name: 'Vôlei',
-      },
-      {
-        name: 'eSports',
-      },
-    ],
-  });
-
-  return _response.json({ message: 'ok' });
-});
+app.get('/seed', seed);
