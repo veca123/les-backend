@@ -1510,12 +1510,44 @@ const usersData = [
 
 const teamsData = [
   {
-    name: 'Team 1',
-    description: 'Team 1 description',
+    name: 'Vila do Chaves',
+    description: 'Futebol com os amigos',
   },
   {
-    name: 'Team 2',
-    description: 'Team 2 description',
+    name: 'Turma do Bairro',
+    description: 'Futebol Com os Amigos',
+  },
+  {
+    name: 'Os Fanaticos',
+    description: 'CS GO com os brother',
+  },
+  {
+    name: 'A quebrada do morro',
+    description: 'Basquete com os amigos',
+  },
+  {
+    name: 'Os Lunaticos',
+    description: 'CS GO com os amigos',
+  },
+  {
+    name: 'Decepticons',
+    description: 'Basquete Com os Amigos',
+  },
+  {
+    name: 'Autobots',
+    description: 'Basquete Com os Amigos',
+  },
+  {
+    name: 'Os Mercenarios',
+    description: 'Call of Duty com os amigos',
+  },
+  {
+    name: 'Turma do Barulho',
+    description: 'Volei com os amigos',
+  },
+  {
+    name: 'Os Vingadores',
+    description: 'Volei com os amigos',
   },
 ];
 
@@ -1542,7 +1574,7 @@ export const seed = async (_request: Request, response: Response) => {
 
   // Create teams
   await prisma.team.deleteMany();
-  // Team 0
+  // Team 0 - futebol
   await prisma.team.create({
     data: {
       name: teamsData[0].name,
@@ -1567,12 +1599,12 @@ export const seed = async (_request: Request, response: Response) => {
     },
   });
 
-  // Team 1
+  // Team 1 - futebol
   await prisma.team.create({
     data: {
       name: teamsData[1].name,
       description: teamsData[1].description,
-      createdBy: users[4].id,
+      createdBy: users[1].id,
       users: {
         connect: [
           {
@@ -1591,18 +1623,114 @@ export const seed = async (_request: Request, response: Response) => {
       },
     },
   });
-
+  // Team 2 - CS GO
+  await prisma.team.create({
+    data: {
+      name: teamsData[2].name,
+      description: teamsData[2].description,
+      createdBy: users[2].id,
+      users: {
+        connect: [
+          {
+            email: users[8].email,
+          },
+          {
+            email: users[9].email,
+          },
+          {
+            email: users[10].email,
+          },
+          {
+            email: users[11].email,
+          },
+        ],
+      },
+    },
+  });
+  // Team 3 - basquete
+  await prisma.team.create({
+    data: {
+      name: teamsData[3].name,
+      description: teamsData[3].description,
+      createdBy: users[3].id,
+      users: {
+        connect: [
+          {
+            email: users[12].email,
+          },
+          {
+            email: users[13].email,
+          },
+          {
+            email: users[14].email,
+          },
+          {
+            email: users[15].email,
+          },
+        ],
+      },
+    },
+  });
+  // Team 4 - CS GO
+  await prisma.team.create({
+    data: {
+      name: teamsData[4].name,
+      description: teamsData[4].description,
+      createdBy: users[4].id,
+      users: {
+        connect: [
+          {
+            email: users[16].email,
+          },
+          {
+            email: users[17].email,
+          },
+          {
+            email: users[18].email,
+          },
+          {
+            email: users[19].email,
+          },
+        ],
+      },
+    },
+  });
+  // Team 5 -Basquete
+  await prisma.team.create({
+    data: {
+      name: teamsData[5].name,
+      description: teamsData[5].description,
+      createdBy: users[5].id,
+      users: {
+        connect: [
+          {
+            email: users[20].email,
+          },
+          {
+            email: users[21].email,
+          },
+          {
+            email: users[22].email,
+          },
+          {
+            email: users[23].email,
+          },
+        ],
+      },
+    },
+  });
   const teams = await prisma.team.findMany();
 
   // Create event
   await prisma.event.deleteMany();
   await prisma.event.create({
+    //evento 0 - futebol
     data: {
-      name: 'Event 1',
-      description: 'Event 1 description',
-      day: '2021-08-01',
+      name: 'Futebol Society',
+      description: 'Evento de Futebol',
+      day: '2022-11-14',
       time: '10:00',
-      teamsLimit: 2,
+      teamsLimit: 22,
       Sport: {
         connect: {
           name: sportsData[0],
@@ -1621,6 +1749,57 @@ export const seed = async (_request: Request, response: Response) => {
       },
     },
   });
-
+  await prisma.event.create({
+    //evento 1 - basquete
+    data: {
+      name: 'Basquete Fest',
+      description: 'Evento de Basquete',
+      day: '2022-11-15',
+      time: '14:00',
+      teamsLimit: 10,
+      Sport: {
+        connect: {
+          name: sportsData[1],
+        },
+      },
+      createdBy: users[1].id,
+      teams: {
+        connect: [
+          {
+            name: teams[3].name,
+          },
+          {
+            name: teams[5].name,
+          },
+        ],
+      },
+    },
+  });
+await prisma.event.create({
+    //evento 2
+    data: {
+      name: 'The Ultimate Major ',
+      description: 'Evento de CS GO',
+      day: '2022-11-16',
+      time: '15:00',
+      teamsLimit: 12,
+      Sport: {
+        connect: {
+          name: sportsData[2],
+        },
+      },
+      createdBy: users[2].id,
+      teams: {
+        connect: [
+          {
+            name: teams[2].name,
+          },
+          {
+            name: teams[4].name,
+          },
+        ],
+      },
+    },
+  });
   return response.json({ message: 'ok' });
 };
