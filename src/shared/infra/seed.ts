@@ -2488,10 +2488,10 @@ export const seed = async (_request: Request, response: Response) => {
       description: 'Evento de Volei na Praia',
       day: '2022-11-20',
       time: '10:00',
-      teamsLimit: 10,
+      teamsLimit: 12,
       Sport: {
         connect: {
-          name: sportsData[0],
+          name: sportsData[2],
         },
       },
       createdBy: users[3].id,
